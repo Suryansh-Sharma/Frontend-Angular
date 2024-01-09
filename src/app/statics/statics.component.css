@@ -1,0 +1,40 @@
+.Statics-Page{
+  margin: 20px;
+
+  height: 1000px
+
+}
+.title{
+  text-align: center;
+
+}
+.title2{
+  margin-top: 100px;
+  font-style: italic;
+}
+.Top-Row{
+  display: flex;
+  justify-content: space-evenly;
+}
+.Gen-Info-Card{
+  /*margin-right: 150px;*/
+  color: aliceblue;
+  cursor: pointer;
+  border:4px solid deeppink;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  border-radius: 10px;
+  width: 300px;
+  background: #4CB8C4;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3CD3AD, #4CB8C4);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3CD3AD, #4CB8C4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.Chart-Section-Input{
+  display: flex;
+  justify-content: space-around;
+}
+a{
+  cursor: pointer;
+}

@@ -1,0 +1,79 @@
+<div class="home-page">
+  <div class="home-page-top">
+
+    <div class="home-page-top-op">
+      <h5 class="home-page-top-op-title">Services</h5>
+      <hr>
+      <div class="operations-box">
+        <a class="op-card" routerLink='/issue-item'>
+          <img alt="image" height="80" src="/assets/Issue-Item.png" width="80">
+          <span>Issue Item</span>
+        </a>
+        <a class="op-card" routerLink='/return-item'>
+          <img alt="image" height="80" src="/assets/Return-Book.png" width="80">
+          <span>Return Item</span>
+        </a>
+        <a class="op-card" routerLink='/generate-fine/new'>
+          <img alt="image" height="80" src="/assets/Fine-Icon.png" width="80">
+          <span>Generate Fine</span>
+        </a>
+        <a class="op-card" routerLink='/search/Item'>
+          <img alt="image" height="80" src="/assets/Search-Icon.png" width="80">
+          <span>Search Item</span>
+        </a>
+        <a class="op-card" routerLink='/search/Issuer'>
+          <img alt="image" height="80" src="/assets/SearchUser.png" width="80">
+          <span>Search User</span>
+        </a>
+      </div>
+
+      <h5 class="home-page-top-op-title">Operations</h5>
+      <hr>
+      <div class="operations-box">
+        <a class="op-card" routerLink='/add-update-issuer/new' >
+          <img alt="image" height="80" src="/assets/Add-User.png" width="80">
+          <span>Add New Issuer</span>
+        </a>
+        <a class="op-card" routerLink='/add-update-new-item/new'>
+          <img alt="image" height="80" src="/assets/New-Icon.png" width="80">
+          <span>Add New Item</span>
+        </a>
+        <a class="op-card" [routerLink]="['/add-update-issuer/search']">
+          <img alt="image" height="80" src="/assets/Update-Icon.png" width="80">
+          <span>Update Issuer</span>
+        </a>
+        <a class="op-card" [routerLink]="['/show-statics']">
+          <img alt="image" height="80" src="/assets/Statics-Icon.png" width="80">
+          <span>Show Statics</span>
+        </a>
+        <a class="op-card" [routerLink]="['/all-fine']">
+          <img alt="image" height="80" src="/assets/AllFines.png" width="80">
+          <span>All Paid Fine</span>
+        </a>
+      </div>
+      <br>
+      <div class="pending-items-section" *ngIf="isLoading">
+      <h5 class="home-page-top-op-title">{{pendingItems.total_records}} Pending Items</h5>
+      <hr>
+        <div class="items">
+          <div class="pending-item" *ngFor="let item of pendingItems.items">
+            <app-borrowed-item [item]="item" (removeItem)="removeBorrowedItem(item)"></app-borrowed-item>
+          </div>
+        </div>
+
+        <div class="pagination">
+          <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
+
+          <div class="pagination-pages">
+            <button *ngFor="let page of createRange(pendingItems.total_pages)" class="page-number" [class.active]="page === currentPage">
+              {{page}}
+            </button>
+          </div>
+
+          <button class="pagination-btn" [disabled]="currentPage===pendingItems.total_pages" (click)="nextPage()">Next</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

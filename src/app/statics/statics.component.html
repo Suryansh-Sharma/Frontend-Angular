@@ -1,0 +1,78 @@
+<div class="Statics-Page">
+  <h3 class="title">General Information</h3>
+  <div class="Top-Row">
+    <div class="Gen-Info-Card">
+      <span>{{generalVisualiseInfo.labels.at(0)}}</span>
+      <hr>
+      <span>{{generalVisualiseInfo.series.at(0)}}</span>
+    </div>
+    <div class="Gen-Info-Card">
+      <span>{{generalVisualiseInfo.labels.at(1)}}</span>
+      <hr>
+      <span>{{generalVisualiseInfo.series.at(1)}}</span>
+    </div>
+    <div class="Gen-Info-Card">
+      <span>{{generalVisualiseInfo.labels.at(2)}}</span>
+      <hr>
+      <span>{{generalVisualiseInfo.series.at(2)}}</span>
+   </div>
+    <div class="Gen-Info-Card">
+      <span>{{generalVisualiseInfo.labels.at(3)}}</span>
+      <hr>
+      <span>₹ {{generalVisualiseInfo.series.at(3)}}</span>
+    </div>
+  </div>
+  <hr>
+  <div class="Charts-Section">
+    <h3 class="title">General Charts</h3>
+    <hr>
+    <div class="Chart-Section-Input">
+      <div class="Name">
+        <h5>{{chartTitle}}</h5>
+      </div>
+      <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+              type="button">{{chartTitle}}</button>
+      <ul class="dropdown-menu">
+        <li><a (click)="handleDropDown('Total Items Per Date',1)" class="dropdown-item">Total Items Per Date</a></li>
+        <li><a (click)="handleDropDown('Total Items By Borrow Status',2)" class="dropdown-item">Total Items By Borrow Status</a></li>
+        <li><a (click)="handleDropDown('Total Items By Type',3)" class="dropdown-item">Total Items By Type</a></li>
+        <li><a (click)="handleDropDown('Total Items Per Subject',4)" class="dropdown-item">Total Items Per Subject</a></li>
+        <li><a (click)="handleDropDown('Total Items Per Publication Year',5)" class="dropdown-item">Total Items Publication Year</a></li>
+        <li><a (click)="handleDropDown('Total Items Per Class',6)" class="dropdown-item">Total Items Per Class</a></li>
+        <li><a (click)="handleDropDown('Total Issuer Per Type',7)" class="dropdown-item">Total Issuer Per Type</a></li>
+        <li><a (click)="handleDropDown('Total Issuer Per Class',8)" class="dropdown-item">Total Issuer Per Class</a></li>
+        <li><a (click)="handleDropDown('Total Fines Per Date',9)" class="dropdown-item">Total Fines Per Date</a></li>
+        <li><a (click)="handleDropDown('Total Items Return On Time',10)" class="dropdown-item">Total Items Return On Time</a></li>
+        <li><a (click)="handleDropDown('Total Items By Publisher',11)" class="dropdown-item">Total Items By Publisher </a></li>
+
+      </ul>
+    </div>
+    <div class="Charts" *ngIf="showChart">
+      <h3 class="title2">Pie Chart</h3>
+
+      <div class="Pie-Chart d-flex justify-content-center">
+        <apx-chart
+          [series]="chartVisualiseInfo.series"
+          [chart]="pieChartOptions.chart"
+          [title]="pieChartOptions.title"
+          [labels]="chartVisualiseInfo.labels"
+        ></apx-chart>
+      </div>
+
+      <hr>
+
+      <h3 class="title2">Bar Chart</h3>
+      <div class="Bar-Chart d-flex justify-content-center mt-4">
+        <apx-chart
+          [series]="barChartOptions.series"
+          [chart]="barChartOptions.chart"
+          [dataLabels]="barChartOptions.labels"
+          [plotOptions]="barChartOptions.plotOptions"
+          [yaxis]="barChartOptions.yaxis"
+          [xaxis]="barChartOptions.xaxis"
+        ></apx-chart>
+      </div>
+
+    </div>
+  </div>
+</div>

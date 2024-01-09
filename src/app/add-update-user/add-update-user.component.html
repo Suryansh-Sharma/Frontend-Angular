@@ -1,0 +1,85 @@
+<div class="add-update-user" >
+  <h5>{{isUpdatePage?'Update Issuer Info':'Add New Issuer'}}</h5>
+
+  <div class="input-sec w-50" *ngIf="showForm">
+    <form>
+      <div class="form-group">
+        <label>Issuer Unique Id</label>
+        <br>
+        <input type="text" class="form-control" placeholder="Enter Issuer Unique Id" (change)="handleDataChange($event)">
+      </div>
+      <br>
+      <button type="button" class="btn btn-primary" (click)="getIssuerInfo(this.uniqueId)">Submit</button>
+    </form>
+  </div>
+
+  <div *ngIf="!isLoading">
+  <div class="input-group mb-3">
+    <span class="input-group-text" >First name</span>
+    <input type="text" class="form-control" placeholder="First name"
+      (change)="handleInputChange($event)" value="{{issuerData.firstname}}" name="firstname"
+    >
+    <span class="input-group-text" >Last name</span>
+    <input type="text" class="form-control" placeholder="Last name"
+     (change)="handleInputChange($event)" value="{{issuerData.lastname}}" name="lastname"
+    >
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" style="color: red">Optional email</span>
+    <input type="email" class="form-control" placeholder="Issuer email"
+     (change)="handleInputChange($event)" value="{{issuerData.email}}" name="email"
+    >
+
+    <span class="input-group-text">Issuer Roll No</span>
+    <input type="number" class="form-control" placeholder="0 for teacher's"
+     (change)="handleInputChange($event)" value="{{issuerData.rollNo}}" name="rollNo"
+    >
+
+    <span class="input-group-text">Contact No</span>
+    <input type="text" class="form-control" placeholder="Enter here"
+     (change)="handleInputChange($event)" value="{{issuerData.contactNo}}" name="contactNo"
+    >
+  </div>
+
+  <div class="input-group mb-3">
+    <span class="input-group-text">Select Issuer type</span>
+    <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+      {{issuerData.issuerType}}
+    </button>
+    <ul class="dropdown-menu">
+      <li><a *ngFor="let issuerType of issuerTypeArray" class="dropdown-item"
+        (click)="handleInputDropdown('issuerType',issuerType)"
+      >{{issuerType}}</a></li>
+    </ul>
+
+
+    <span class="input-group-text mx-2">Select Issuer Branch</span>
+    <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+      {{issuerData.issuerBranch}}
+    </button>
+    <ul class="dropdown-menu ">
+      <li><a *ngFor="let issuerBranch of issuerBranchArray" class="dropdown-item"
+        (click)="handleInputDropdown('issuerBranch',issuerBranch)"
+      >{{issuerBranch}}</a></li>
+    </ul>
+
+    <span class="input-group-text mx-2">Select Issuer Class</span>
+    <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+      {{issuerData.issuerClass}}
+    </button>
+    <ul class="dropdown-menu ">
+      <li><a *ngFor="let issuerClass of issuerClassArray" class="dropdown-item"
+         (click)="handleInputDropdown('issuerClass',issuerClass)"
+      >{{issuerClass}}</a></li>
+    </ul>
+
+  </div>
+
+  <div class="add-issuer-submit-btn-section">
+    <button type="button" class="btn btn-outline-success btn-lg"
+      (click)="handleValidateAndSubmit()"
+    >{{isUpdatePage?'Update Issuer Info':'Add New Issuer'}}</button>
+  </div>
+  </div>
+</div>

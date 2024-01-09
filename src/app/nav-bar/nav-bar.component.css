@@ -1,0 +1,17 @@
+.nav-bar{
+  padding: 20px;
+  background-color: #a6dbf9;
+}
+
+.nav-bar-mid{
+  display: flex;
+}
+
+.nav-profile{
+  display: flex;
+}
+@media print {
+  .nav-bar{
+    display: none;
+  }
+}

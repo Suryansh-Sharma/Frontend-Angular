@@ -1,0 +1,83 @@
+.Item-FullDetail-Page{
+  margin: 20px;
+  padding: 10px;
+}
+.card{
+  padding: 20px;
+}
+/* Add additional styling for rows */
+.item-info p {
+  margin: 5px 0;
+}
+
+/* Adjust margins for cleaner look */
+.stock-info h3 {
+  margin-top: 15px;
+}
+
+/* Styling for the additional information sections */
+.book-info, .magazine-info {
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.magazine-info {
+  font-style: italic;
+}
+.items{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px; /* Adjust spacing as needed */
+  overflow: hidden;
+}
+.pending-items-pagination{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  border-radius: 4px;
+}
+
+.pagination-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-pages {
+  display: flex;
+}
+
+.page-number {
+  padding: 8px 12px;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  border-radius: 4px;
+}
+
+.page-number.active {
+  background-color: #007bff;
+  color: #fff;
+}
+.Show-Hide-Btn{
+  width: 120px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}

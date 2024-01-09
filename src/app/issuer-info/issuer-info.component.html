@@ -1,0 +1,66 @@
+<div class="issuerProfilePage">
+  <div class="profileSection">
+
+    <div class="user-card">
+      <img src="https://via.placeholder.com/100" alt="User Image">
+      <h2>{{ IssuerData.first_name }} {{ IssuerData.last_name }}</h2>
+      <p class="label">Roll No:</p>
+      <p class="info">{{ IssuerData.roll_no }}</p>
+      <p class="label">Issuer Type:</p>
+      <p class="info">{{ IssuerData.issuer_type }}</p>
+      <p class="label">Contact No:</p>
+      <p class="info">{{ IssuerData.contact_no }}</p>
+      <p class="label">Email:</p>
+      <p class="info">{{ IssuerData.email }}</p>
+      <p class="label">Issuer Class:</p>
+      <p class="info">{{ IssuerData.issuer_class }}</p>
+      <p class="label">Unique ID:</p>
+      <p class="info">{{ IssuerData.unique_id }}</p>
+      <p class="label">Issuer Branch:</p>
+      <p class="info">{{ IssuerData.issuer_branch }}</p>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <br>
+  <h4>Issuer All Files</h4>
+  <div class="IssuerFinesSection">
+    <div class="card-list">
+      <div *ngFor="let fine of this.IssuerData.allFine" class="card">
+        <p>{{ fine.payDateTime }}</p>
+        <p>Total Items: {{ fine.totalItems }}</p>
+        <p>Amount: Rs. {{ fine.amount }}</p>
+        <!-- Add more details as needed -->
+        <a [href]="fine.downloadUrl" target="_blank">Download</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <h4>Issuer All Borrows</h4>
+  <br>
+  <div class="pending-items-section" *ngIf="!isLoading">
+    <h5 class="home-page-top-op-title">{{borrowedItems.total_records}} Items</h5>
+    <hr>
+    <div class="items">
+      <div class="pending-item" *ngFor="let item of borrowedItems.items">
+        <app-borrowed-item [item]="item"></app-borrowed-item>
+      </div>
+    </div>
+
+    <div class="pagination" *ngIf='!isLoading'>
+      <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
+
+      <div class="pagination-pages">
+        <button *ngFor="let page of createRange(borrowedItems.total_pages)" class="page-number" [class.active]="page === currentPage"
+                (click)="clickPageNo(page)">
+          {{page}}
+        </button>
+      </div>
+
+      <button class="pagination-btn" [disabled]="currentPage===borrowedItems.total_pages" (click)="nextPage()">Next</button>
+    </div>
+
+  </div>
+  <br>
+</div>

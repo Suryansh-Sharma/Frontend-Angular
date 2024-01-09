@@ -1,0 +1,143 @@
+<div class="add-update-form">
+  <h3 style="text-align: center">{{isUpdatePage?'Update Item':'Add New Item'}}</h3>
+  <br>
+  <h5>Item Basic Detail</h5>
+  <hr>
+  <div class="input-group mb-3 w-50">
+    <span class="input-group-text" id="basic-addon1">Item Name</span>
+    <input (change)="handleFormChange($event)" class="form-control" name="title" placeholder="Enter value here"
+           type="text"
+           value="{{ itemData.title }}">
+
+  </div>
+
+  <div class="input-group mb-3 w-50 position-relative">
+    <div class="Publisher-Section">
+
+      <!-- Publisher Input Section -->
+      <div class="Publisher-Section-Input input-group">
+        <span class="input-group-text">Publisher</span>
+        <input
+          (input)="handleFormChange($event)"
+          class="form-control"
+          name="publisher"
+          placeholder="Enter Publisher Name"
+          type="text"
+          value="{{itemData.publisher}}"
+          data-bs-toggle="dropdown"
+        >
+
+        <!-- Search Results Section -->
+        <ul class="dropdown-menu mt-2">
+            <li *ngFor="let name of publisherSearch" style="cursor: pointer"><a  class="dropdown-item" (click)="handleSearchClick(name)">{{name}}</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="input-group mb-3">
+
+    <span class="input-group-text mx-1">Select Item Type</span>
+    <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            type="button">{{itemData.itemType}}</button>
+    <ul class="dropdown-menu">
+      <li><a (click)="handleDropDown('itemType','BOOK')" class="dropdown-item">BOOK</a></li>
+      <li><a (click)="handleDropDown('itemType','MAGAZINE')" class="dropdown-item">MAGAZINE</a></li>
+      <li><a (click)="handleDropDown('itemType','OTHER')" class="dropdown-item">OTHER</a></li>
+    </ul>
+  </div>
+
+  <div class="input-group">
+    <span class="input-group-text">Item Description</span>
+    <input (change)="handleFormChange($event)" class="form-control" style="height: 100px" name="description" value="{{itemData.description}}"
+    />
+  </div>
+
+  <div class="input-group mb-3 mt-2">
+    <span class="input-group-text">Item Rack Location</span>
+    <input (change)="handleFormChange($event)" class="form-control" name="itemLocation" placeholder="Enter Here"
+           type="text" value="{{itemData.itemLocation}}"
+    >
+    <span class="input-group-text">Item Written Language</span>
+    <input (change)="handleFormChange($event)" class="form-control" name="itemLanguage"
+           placeholder="Language"
+           type="text" value="{{itemData.itemLanguage}}"
+    >
+  </div>
+  <!--  Item Stock Section -->
+  <div class="form-outline w-50 mb-3 input-group">
+    <span class="input-group-text">Enter Item Stock</span>
+    <input (change)="handleFormChange($event)" class="form-control"
+           name="itemStock"
+           type="text" value="{{itemData.stock.quantity}}" placeholder="Enter Quantity"
+    />
+
+    <span class="input-group-text">Select Item Subject</span>
+    <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+      {{itemData.subject}}
+    </button>
+    <ul class="dropdown-menu">
+      <li><a *ngFor="let bookType of bookTypes" class="dropdown-item"
+             (click)="handleDropDown('subject',bookType)"
+      >{{bookType}}</a></li>
+    </ul>
+  </div>
+  <br>
+  <div class="Book-Model" *ngIf="itemData.itemType==='BOOK' && !isUpdatePage">
+    <h5>Book Info</h5>
+    <hr>
+    <div class="input-group">
+      <span class="input-group-text">Author Name</span>
+      <input type="text" class="form-control" value="{{BookModelData.author}}"
+        name="author" (change)="handleBookForm($event)"
+      >
+
+      <span class="input-group-text">Select Book Class</span>
+      <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+        {{BookModelData.bookClass}}
+      </button>
+      <ul class="dropdown-menu">
+        <li><a *ngFor="let bookClass of issuerClassArray" class="dropdown-item"
+               (click)="handleDropDown('class',bookClass)"
+        >{{bookClass}}</a></li>
+      </ul>
+
+    <span class="input-group-text">Publication year</span>
+    <input type="number" class="form-control" placeholder="Ex:- 2023"
+           value="{{BookModelData.publicationYear}}"
+           name="publicationYear" (change)="handleBookForm($event)"
+    >
+    </div>
+
+  </div>
+
+  <br>
+  <div class="Magazine-Model" *ngIf="itemData.itemType==='MAGAZINE' &&!isUpdatePage">
+    <h5>Magazine Info</h5>
+    <hr>
+    <div class="input-group w-50">
+      <span class="input-group-text">Date of publish</span>
+      <input type="date" class="form-control" name="publishedDate" value="{{MagazineModelData.publishedDate}}"
+      (change)="handleMagazineForm($event)"
+      >
+
+      <span class="input-group-text">Editor Name</span>
+      <input type="text" class="form-control" placeholder="Enter name here"
+             name="editor" value="{{MagazineModelData.editor}}"
+             (change)="handleMagazineForm($event)"
+      >
+    </div>
+  </div>
+  <div class="add-edit-submit-btn-section">
+    <button type="button" class="btn btn-outline-success btn-lg"
+      (click)="updateData()" *ngIf="isUpdatePage"
+    >Update Item</button>
+    <button type="button" class="btn btn-outline-success btn-lg"
+            (click)="validateAndSubmitForm()" *ngIf="!isUpdatePage"
+    >Add New Item</button>
+  </div>
+</div>
+
+

@@ -1,0 +1,65 @@
+<div class="Item-FullDetail-Page">
+  <div class="card">
+    <div class="item-info">
+      <h2>{{this.itemData.title}}</h2>
+      <p><strong>Publisher:</strong> {{this.itemData.publisher}}</p>
+      <p><strong>Item Type:</strong> {{this.itemData.itemType}}</p>
+      <p><strong>Subject:</strong> {{this.itemData.subject}}</p>
+      <p><strong>Description:</strong> {{this.itemData.description}}</p>
+      <p><strong>Item Location:</strong> {{this.itemData.itemLocation}}</p>
+      <p><strong>Item Language:</strong> {{this.itemData.itemLanguage}}</p>
+      <p><strong>Unique ID:</strong> {{this.itemData.uniqueId}}</p>
+    </div>
+
+    <div class="stock-info">
+      <h3>Stock Information</h3>
+      <p><strong>Quantity:</strong> {{this.itemData.stock.quantity}}</p>
+      <p><strong>Available Quantity:</strong> {{this.itemData.stock.availableQuantity}}</p>
+      <p><strong>Last Stocked:</strong> {{this.itemData.stock.lastStocked}}</p>
+      <p><strong>Last Checked Out:</strong> {{this.itemData.stock.lastCheckedOut}}</p>
+      <p><strong>Last Checked In:</strong> {{this.itemData.stock.lastCheckedIn}}</p>
+    </div>
+
+    <div *ngIf="this.itemData.itemType === 'BOOK'" class="book-info">
+      <h3>Book Information</h3>
+      <p><strong>Author:</strong> {{this.itemData.book.author}}</p>
+      <p><strong>Publication Year:</strong> {{this.itemData.book.publicationYear}}</p>
+      <p><strong>Book Type:</strong> {{this.itemData.book.bookType}}</p>
+      <p><strong>Book Class:</strong> {{this.itemData.book.bookClass}}</p>
+    </div>
+
+    <div *ngIf="this.itemData.itemType === 'MAGAZINE'" class="magazine-info">
+      <h3>Magazine Information</h3>
+      <p><strong>Editor:</strong> {{this.itemData.magazine.editor}}</p>
+      <p><strong>Published Year:</strong> {{this.itemData.magazine.publishedDate}}</p>
+    </div>
+
+    <br>
+    <hr>
+    <button type="button" class="btn btn-info Show-Hide-Btn" (click)="showAllBorrowsOfItem()">
+      {{!showBorrows?'Show Item All Borrows':'Hide All Borrows'}}
+    </button>
+    <div class="pending-items-section" *ngIf="showBorrows">
+      <h5 class="home-page-top-op-title">{{itemsBorrows.total_records}} Total Borrows</h5>
+      <hr>
+      <div class="items">
+        <div class="pending-item" *ngFor="let item of itemsBorrows.items">
+          <app-borrowed-item [item]="item"></app-borrowed-item>
+        </div>
+      </div>
+
+      <div class="pagination" *ngIf='showBorrows'>
+        <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
+
+        <div class="pagination-pages">
+          <button *ngFor="let page of createRange(itemsBorrows.total_pages)" class="page-number" [class.active]="page === currentPage">
+            {{page}}
+          </button>
+        </div>
+
+        <button class="pagination-btn" [disabled]="currentPage===itemsBorrows.total_pages" (click)="nextPage()">Next</button>
+      </div>
+
+    </div>
+  </div>
+</div>

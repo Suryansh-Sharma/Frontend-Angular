@@ -1,0 +1,97 @@
+<div class="Search-Page">
+  <h3 class="Search-Page-Title">Search {{param}}</h3>
+  <div class="Search-Page-Bar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="input-group-text d-flex justify-content-evenly" *ngIf="isItemPage">
+        <span class="p-1">Is Book </span>
+        <input type="checkbox" class="m-1" name="isBook" (change)="handleValueChange($event)" value="{{isChecked}}">
+      </div>
+
+      <div class="dropdown p-1" *ngIf="!isItemPage">
+        <a class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          {{IssuerSearchTarget.toUpperCase()}}
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" >
+          <li><a class="dropdown-item" (click)="handleDropDownChange('firstname')">firstname</a></li>
+          <li><a class="dropdown-item" (click)="handleDropDownChange('unique_id')">unique_id</a></li>
+          <li><a class="dropdown-item" (click)="handleDropDownChange('contact_no')">contact_no</a></li>
+          <li><a class="dropdown-item" (click)="handleDropDownChange('email')">email</a></li>
+        </ul>
+
+      </div>
+      <input class="form-control mx-4 w-50" (change)="handleValueChange($event)" placeholder="Search" aria-label="Search" >
+      <button class="btn btn-outline-success my-2  mx-2" type="button" (click)="handleSearchData()">Search</button>
+    </nav>
+  </div>
+
+  <div class="Search-Page-Item-Res">
+    <h5>Total Record :- {{isItemPage?ItemSearchRes.total_records:IssuerSearchRes.total_records}}</h5>
+    <div class="S-P-I-R-Cards" *ngIf="ItemSearchRes.total_records!=undefined && ItemSearchRes.total_records>0">
+      <a *ngFor="let item of ItemSearchRes.items" [routerLink]="['/item-full-detail/'+item.item_unique_id]">
+        <div class="card card1"  >
+          <div class="card-body">
+            <h5 class="card-title">{{item.item_name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Published by :-  {{item.publisher}}</h6>
+            <span class="card-subtitle mb-2 text-muted">{{item.itemType}}</span>
+            <br>
+            <span class="card-subtitle mb-2 text-muted">Placed at :-  {{item.itemLocation}}</span>
+            <br>
+            <span class="card-subtitle mb-2 text-muted">Unique Id :-  {{item.item_unique_id}}</span>
+            <br>
+<!--            <a href="#" class="card-link">Card link</a>-->
+          </div>
+        </div>
+      </a>
+    </div>
+
+<!--    Issuers Result Section-->
+
+    <div class="S-P-I-R-Cards" *ngIf="IssuerSearchRes.total_records!=undefined && IssuerSearchRes.total_records>0">
+
+      <div *ngFor="let issuer of IssuerSearchRes.items">
+        <div class="card card1"  (click)="handleRouting('Issuer-Full-Profile',issuer.unique_id)">
+          <div class="card-body">
+            <h5 class="card-title">{{issuer.first_name}}  {{issuer.last_name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Class :-  {{issuer.issuer_class}}</h6>
+            <span class="card-subtitle mb-2 text-muted">Contact No :- {{issuer.contact_no}}</span>
+            <br>
+            <span class="card-subtitle mb-2 text-muted">Issuer Type :-  {{issuer.issuer_type}}</span>
+            <br>
+            <span class="card-subtitle mb-2 text-muted">Unique Id :-  {{issuer.unique_id}}</span>
+            <br>
+            <!--            <a href="#" class="card-link">Card link</a>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--    Pagination for Item -->
+    <div class="pagination" *ngIf='ItemSearchRes.total_records!=undefined && ItemSearchRes.total_records>0'>
+      <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
+
+      <div class="pagination-pages">
+        <button *ngFor="let page of createRange(ItemSearchRes.total_pages)" class="page-number" [class.active]="page === currentPage" (click)="handlePageClick(page)">
+          {{page}}
+        </button>
+      </div>
+
+      <button class="pagination-btn" [disabled]="currentPage===ItemSearchRes.total_pages" (click)="nextPage()">Next</button>
+    </div>
+
+    <!--    Pagination for Issuer -->
+    <div class="pagination" *ngIf='IssuerSearchRes.total_records!=undefined && IssuerSearchRes.total_records>0 && !isLoading'>
+      <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
+
+      <div class="pagination-pages">
+        <button *ngFor="let page of createRange(IssuerSearchRes.total_pages)" class="page-number" [class.active]="page === currentPage" (click)="handlePageClick(page)">
+          {{page}}
+        </button>
+      </div>
+
+      <button class="pagination-btn" [disabled]="currentPage==IssuerSearchRes.total_pages" (click)="nextPage()">Next</button>
+    </div>
+
+  </div>
+
+</div>

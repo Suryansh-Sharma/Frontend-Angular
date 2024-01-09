@@ -1,0 +1,12 @@
+.add-update-form{
+  margin: 20px;
+}
+.add-edit-submit-btn-section{
+  display: flex;
+  place-items: center;
+  flex-direction: column;
+  margin-top: 30px;
+}
+li{
+  cursor: pointer;
+}

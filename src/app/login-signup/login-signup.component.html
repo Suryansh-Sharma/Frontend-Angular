@@ -1,0 +1,45 @@
+<div class="Login-SignUp-Page">
+  <div class="box-form">
+    <div class="left">
+      <div class="overlay">
+        <h1>Hello World.</h1>
+        <p>This is Library Software help's to  manage library.</p>
+        <span>
+		</span>
+      </div>
+    </div>
+
+
+    <div class="right">
+      <h5 style="font-size: 50px">{{isSignUp?'Sign Up':'Login'}}</h5>
+      <p *ngIf="!isSignUp" class="my-5">Don't have an account? <a href="/security/signUp">Creat Your Account</a> it takes less than a minute</p>
+      <p *ngIf="isSignUp" class="my-5">Already have an account? <a href="/security/login">Login Your Account</a></p>
+      <div class="inputs">
+        <input type="text" placeholder="Username" value="{{this.loginData.username}}" (input)="handleDataChange($event)" name="username"
+               #input1 (keydown.arrowDown)="changeFocus()"
+        >
+        <br>
+        <input type="password" placeholder="Password" value="{{this.loginData.password}}" (input)="handleDataChange($event)" name="password"
+          (keydown.enter)="handleSubmitData()" #input2
+        >
+      </div>
+
+      <br><br>
+
+      <div class="remember-me--forget-password">
+        <!-- Angular -->
+<!--        <label>-->
+<!--          <input type="checkbox" name="item" checked/>-->
+<!--          <span class="text-checkbox">Remember me</span>-->
+<!--        </label>-->
+        <p>forget password?</p>
+      </div>
+
+      <br>
+
+      <button *ngIf="isSignUp" type="button" (click)="handleSubmitData()">Create Account</button>
+      <button *ngIf="!isSignUp" type="button" (click)="handleSubmitData()">Login</button>
+    </div>
+
+  </div>
+</div>

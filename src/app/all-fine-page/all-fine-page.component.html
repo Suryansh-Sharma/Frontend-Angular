@@ -1,0 +1,43 @@
+<div class="Fine-Page">
+  <div class="Fines" *ngIf="!isLoading">
+    <!-- fines.component.html -->
+    <div class="fine-card" *ngFor="let fine of allFinePage.items">
+      <div class="fine-header">
+        <h2>Fine #{{ fine.id }}</h2>
+        <p>Payed on: {{ fine.payed_on }}</p>
+      </div>
+
+      <div class="fine-details">
+        <p>Total Amount: {{ fine.total_amount | currency:'INR':'symbol' }}</p>
+        <p>Total Items: {{ fine.total_items }}</p>
+      </div>
+
+      <div class="issuer-info">
+        <h3>Issuer Information</h3>
+        <p>Name: {{ fine.issuer_info.first_name }} {{ fine.issuer_info.last_name }}</p>
+        <p>Issuer Type: {{ fine.issuer_info.issuer_type }}</p>
+        <p>Contact Number: {{ fine.issuer_info.contact_no }}</p>
+        <p>Email: {{ fine.issuer_info.email }}</p>
+        <!-- Add more issuer details as needed -->
+      </div>
+
+      <div class="download-link">
+        <a href="{{ fine.download_slip }}" target="_blank">Download Pay Slip</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pagination">
+    <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
+
+    <div class="pagination-pages">
+      <button *ngFor="let page of createRange(allFinePage.total_pages)" class="page-number" [class.active]="page === currentPage">
+        {{page}}
+      </button>
+    </div>
+
+    <button class="pagination-btn" [disabled]="currentPage===allFinePage.total_pages" (click)="nextPage()">Next</button>
+  </div>
+
+</div>

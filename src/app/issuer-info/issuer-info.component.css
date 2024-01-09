@@ -1,0 +1,94 @@
+.user-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: center;
+}
+
+img {
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.label {
+  font-weight: bold;
+  color: #333;
+}
+
+.info {
+  color: #666;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 150px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.items{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px; /* Adjust spacing as needed */
+  overflow: hidden;
+}
+.pending-items-pagination{
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination-btn {
+  padding: 8px 16px;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  border-radius: 4px;
+}
+
+.pagination-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination-pages {
+  display: flex;
+}
+
+.page-number {
+  padding: 8px 12px;
+  margin: 0 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  border-radius: 4px;
+}
+
+.page-number.active {
+  background-color: #007bff;
+  color: #fff;
+}

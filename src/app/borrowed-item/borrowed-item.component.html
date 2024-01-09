@@ -1,0 +1,38 @@
+<div class="{{item.isReturnPeriodOver===true?'item-info-period-over':'item-info'}}">
+  <h5><b>{{item.item_name}}</b></h5>
+  <span><b>Borrowed on:- </b> <a>{{item.borrowDate}}</a></span>
+  <span><b>Expected Returned on:- </b> <a>{{item.expectedReturnDate}}</a></span>
+  <span *ngIf="item.returnStatus"><b>Actual Returned on:- </b> <a>{{item.actualReturnDate}}</a></span>
+  <span><b>Quantity:- </b> <a>{{item.quantity}}</a></span>
+  <span><a href="http://localhost:4200/item-full-detail/{{item.item_unique_id}}" >Show Item</a></span>
+
+  <div class="item-user-info">
+
+    <div class="item-action-btn" *ngIf="!this.item.returnStatus">
+      <button class="btn btn-success btn-sm mt-1" type="button" (click)="handleUserProfileBtn()">{{!viewUserProfile?"View Profile":"Hide Profile"}}</button>
+      <button class="btn btn-info btn-sm mt-1" type="button"
+              (click)="!this.item.isReturnPeriodOver? returnItemOnTime():returnItemWithFine()" >
+       {{!this.item.isReturnPeriodOver?'Return Item':'Generate Fine'}}
+      </button>
+      <button class="btn btn-secondary btn-sm mt-1" type="button" (click)="extendReturnPeriod()">Extend 15 day of return</button>
+    </div>
+
+    <div class="user-profile" *ngIf="viewUserProfile">
+      <span><b>Name:- </b>{{userProfile.first_name}} </span>
+      <span>{{userProfile.last_name}}</span>
+      <br>
+      <span><b>unique id:- </b>{{userProfile.unique_id}}</span>
+      <br>
+      <span><b>Class:- </b>{{userProfile.issuer_class}}</span>
+      <br>
+      <span><b>Contact No:- </b>{{userProfile.contact_no}}</span>
+      <br>
+      <span><b>Roll no:- </b> {{userProfile.roll_no}}</span>
+      <br>
+      <span><b>Issuer Type:- </b> {{userProfile.issuer_type}}</span>
+    </div>
+  </div>
+  <div class="item-info-action">
+
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.item-info{
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  border: 2px solid lawngreen;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.item-info-period-over{
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  border: 2px solid red;
+  padding: 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.item-action-btn{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

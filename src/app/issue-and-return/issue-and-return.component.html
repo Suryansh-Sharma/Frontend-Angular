@@ -1,0 +1,61 @@
+<div class="borrow-and-return">
+  <br>
+  <h5>{{isReturnComponent?'Return Item':'Issue New Item'}}</h5>
+  <hr>
+  <div>
+    <div class="input-group mb-3 w-50">
+      <span class="input-group-text">Issuer Unique Id</span>
+      <input type="text" class="form-control" placeholder="Enter issuer unique id"
+             name="issuerUniqueId" (change)="handleDataChange($event)"
+      >
+    </div>
+    <br>
+
+    <div class="input-group mb-3 w-50">
+      <span class="input-group-text">Item Unique Id</span>
+      <input type="text" class="form-control" placeholder="Enter item unique id"
+             name="itemUniqueId" (change)="handleDataChange($event)"
+      >
+    </div>
+    <br>
+    <div class="input-group mb-3 w-50" *ngIf="!isReturnComponent">
+      <span class="input-group-text">Enter expected return date of item</span>
+      <input type="date" class="form-control"
+             name="expectedReturnDate"  (change)="handleDataChange($event)"
+      >
+    </div>
+
+    <br>
+    <br>
+    <div class="pending-items-section" *ngIf="!isLoading">
+      <h5 class="home-page-top-op-title">{{pendingItems.total_records}} Pending Items</h5>
+      <hr>
+      <div class="items">
+        <div class="pending-item" *ngFor="let item of pendingItems.items">
+          <app-borrowed-item [item]="item" (removeItem)="removeBorrowedItem(item)"></app-borrowed-item>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
+
+        <div class="pagination-pages">
+          <button *ngFor="let page of createRange(pendingItems.total_pages)" class="page-number" [class.active]="page === currentPage">
+            {{page}}
+          </button>
+        </div>
+
+        <button class="pagination-btn" [disabled]="currentPage===pendingItems.total_pages" (click)="nextPage()">Next</button>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="borrow-and-return-btn ">
+      <button type="button" class="btn btn-success btn-lg" (click)="validateAndSubmit()">
+        {{isReturnComponent?'Get List Of Items':'Issue New Item'}}
+      </button>
+    </div>
+
+  </div>
+</div>
