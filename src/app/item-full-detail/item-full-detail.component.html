@@ -9,6 +9,9 @@
       <p><strong>Item Location:</strong> {{this.itemData.itemLocation}}</p>
       <p><strong>Item Language:</strong> {{this.itemData.itemLanguage}}</p>
       <p><strong>Unique ID:</strong> {{this.itemData.uniqueId}}</p>
+      <a [routerLink]="['/add-update-new-item', itemData.uniqueId]">
+        <span>Update Item</span>
+      </a>
     </div>
 
     <div class="stock-info">

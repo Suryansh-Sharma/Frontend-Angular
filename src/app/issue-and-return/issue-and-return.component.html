@@ -18,11 +18,15 @@
       >
     </div>
     <br>
-    <div class="input-group mb-3 w-50" *ngIf="!isReturnComponent">
+    <div class="input-group mb-3 w-50" *ngIf="!isReturnComponent && returnItemOnCustomDate">
       <span class="input-group-text">Enter expected return date of item</span>
       <input type="date" class="form-control"
              name="expectedReturnDate"  (change)="handleDataChange($event)"
       >
+    </div>
+    <div class="mb-3 form-check" *ngIf="!isReturnComponent">
+      <input type="checkbox"  class="form-check-input" [checked]="!returnItemOnCustomDate" (change)="handleCheckBoxChange()">
+      <label class="form-check-label">Issuer will have to return item before <b>{{issueItemData.expectedReturnDate}}</b></label>
     </div>
 
     <br>

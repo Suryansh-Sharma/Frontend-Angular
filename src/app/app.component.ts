@@ -10,6 +10,7 @@ export class AppComponent {
   authService:AuthService
   constructor() {
     this.authService=new AuthService();
+    this.authService.validateJwt()
   }
   title = 'Frontend-Angular';
   protected readonly top = top;

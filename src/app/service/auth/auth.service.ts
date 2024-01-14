@@ -1,7 +1,8 @@
 import {inject, Injectable} from '@angular/core';
-import {Router} from "@angular/router";
 import {AuthApiService} from "../api/auth api/auth-api.service";
 import SweatAl from "sweetalert2";
+import {LoginResModel} from "../api/model/LoginResModel";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ import SweatAl from "sweetalert2";
 export class AuthService {
   private isUserLogin=false;
   username="";
-  private router = inject(Router);
   private authApi=inject(AuthApiService);
   constructor() {
     const val = localStorage.getItem('isLogin');
@@ -22,18 +22,12 @@ export class AuthService {
   login(data:any){
     this.authApi.loginAccount(data)
       .subscribe({
-        next:()=>{
-          console.log("Login Successful")
-          localStorage.setItem('isLogin','true');
-          localStorage.setItem('username',data.username);
-          this.isUserLogin=true;
-          location.reload();
+        next:(res)=>{
+          this.storeUserInfoInLocalStorage(res);
         },
         error:err => {
           console.log(err);
-          let errMsg = JSON.parse(err.error);
-          console.log(errMsg)
-          SweatAl.fire('Error',errMsg.error.message,'error').then()
+          SweatAl.fire('Error',err.error.error.message,'error').then();
         }
       });
 
@@ -42,30 +36,51 @@ export class AuthService {
   signUp(data:any){
     this.authApi.createAccount(data)
       .subscribe({
-        next:()=>{
-          console.log("Login Successful")
-          localStorage.setItem('isLogin','true');
-          localStorage.setItem('username',data.username);
-          this.isUserLogin=true;
-          location.reload();
+        next:(res)=>{
+          this.storeUserInfoInLocalStorage(res);
         },
         error:err => {
           console.log(err);
-          let errMsg = JSON.parse(err.error);
-          console.log(errMsg)
-          SweatAl.fire('Error',errMsg.error.message,'error').then()
+          SweatAl.fire('Error',err.error.error.message,'error').then();
         }
       });
 
   }
-
+  getJwtFromLocalStorage():string{
+    let res = "";
+    const token = localStorage.getItem('jwt');
+    if (token!==null){
+      res = token;
+    }else{
+      this.logout();
+    }
+    return res;
+  }
+  validateJwt(){
+    if (!this.isLoggedIn())return;
+    const helper = new JwtHelperService();
+    if (helper.isTokenExpired(this.getJwtFromLocalStorage())){
+      SweatAl.fire('Error',"Sorry your session is expired please re login !!",'error').then(()=>{
+        this.logout();
+      });
+    }
+  }
   logout(){
     localStorage.removeItem('isLogin');
     localStorage.removeItem('username');
+    localStorage.removeItem('jwt');
     this.isUserLogin=true;
     location.reload();
+    return;
   }
   isLoggedIn(){
     return this.isUserLogin;
+  }
+  storeUserInfoInLocalStorage(res:LoginResModel){
+    localStorage.setItem('isLogin','true');
+    localStorage.setItem('username',res.username);
+    localStorage.setItem('jwt',res.jwtResponse.token)
+    this.isUserLogin=true;
+    location.reload();
   }
 }

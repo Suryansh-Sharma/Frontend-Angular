@@ -2,7 +2,6 @@
   <div class="profileSection">
 
     <div class="user-card">
-      <img src="https://via.placeholder.com/100" alt="User Image">
       <h2>{{ IssuerData.first_name }} {{ IssuerData.last_name }}</h2>
       <p class="label">Roll No:</p>
       <p class="info">{{ IssuerData.roll_no }}</p>
@@ -18,6 +17,9 @@
       <p class="info">{{ IssuerData.unique_id }}</p>
       <p class="label">Issuer Branch:</p>
       <p class="info">{{ IssuerData.issuer_branch }}</p>
+      <a [routerLink]="['/add-update-issuer', IssuerData.unique_id]">
+        <span>Update Issuer Profile</span>
+      </a>
     </div>
   </div>
   <br>

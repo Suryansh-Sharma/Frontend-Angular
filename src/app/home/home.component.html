@@ -23,7 +23,7 @@
         </a>
         <a class="op-card" routerLink='/search/Issuer'>
           <img alt="image" height="80" src="/assets/SearchUser.png" width="80">
-          <span>Search User</span>
+          <span>Search Issuer</span>
         </a>
       </div>
 
@@ -52,7 +52,7 @@
         </a>
       </div>
       <br>
-      <div class="pending-items-section" *ngIf="isLoading">
+      <div class="pending-items-section" *ngIf="!isLoading">
       <h5 class="home-page-top-op-title">{{pendingItems.total_records}} Pending Items</h5>
       <hr>
         <div class="items">

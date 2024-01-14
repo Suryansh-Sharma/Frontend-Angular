@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginSignUpModel} from "../model/LoginSignUpModel";
+import {LoginResModel} from "../model/LoginResModel";
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,9 @@ export class AuthApiService {
   baseUrl = `http://localhost:8080/api/v1/auth/`
 
   createAccount(model:LoginSignUpModel){
-    return this.http.post(this.baseUrl+`signUp`,model,{responseType:'text'})
+    return this.http.post<LoginResModel>(this.baseUrl+`signUp`,model)
   }
   loginAccount(model:LoginSignUpModel){
-    return this.http.post(this.baseUrl+`login`,model,{responseType:'text'})
+    return this.http.post<LoginResModel>(this.baseUrl+`login`,model)
   }
 }

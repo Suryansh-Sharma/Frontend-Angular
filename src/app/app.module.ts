@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {NavBarComponent} from './nav-bar/nav-bar.component';
-import {NgOptimizedImage} from "@angular/common";
+import {DatePipe, NgOptimizedImage} from "@angular/common";
 import {HomeComponent} from './home/home.component';
 import {BorrowedItemComponent} from './borrowed-item/borrowed-item.component';
 import {AddUpdateItemComponent} from './add-update-item/add-update-item.component';
@@ -47,7 +47,8 @@ import { AllFinePageComponent } from './all-fine-page/all-fine-page.component';
         NgApexchartsModule
     ],
   providers: [
-    HttpClient
+    HttpClient,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

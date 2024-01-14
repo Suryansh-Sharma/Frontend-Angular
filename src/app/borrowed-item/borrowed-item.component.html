@@ -1,5 +1,5 @@
 <div class="{{item.isReturnPeriodOver===true?'item-info-period-over':'item-info'}}">
-  <h5><b>{{item.item_name}}</b></h5>
+  <h5 class="Item-Name"><b>{{item.item_name}}..</b></h5>
   <span><b>Borrowed on:- </b> <a>{{item.borrowDate}}</a></span>
   <span><b>Expected Returned on:- </b> <a>{{item.expectedReturnDate}}</a></span>
   <span *ngIf="item.returnStatus"><b>Actual Returned on:- </b> <a>{{item.actualReturnDate}}</a></span>

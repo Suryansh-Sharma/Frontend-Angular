@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import SweatAl from 'sweetalert2';
 import {Item, LibraryItemsPage} from "../service/api/model/LibraryItemsPage";
 import {Title} from "@angular/platform-browser";
+import {DatePipe} from "@angular/common";
 @Component({
   selector: 'app-borrow-and-return',
   templateUrl: './issue-and-return.component.html',
@@ -14,13 +15,21 @@ export class IssueAndReturnComponent {
   constructor(private toastService:ToastService
               ,private libraryApi:LibraryService
               ,private activeRoute:ActivatedRoute,
-              private titleService:Title) {
+              private titleService:Title,
+              private datePipe:DatePipe) {
     this.onInit()
   }
   isReturnComponent=false;
+  returnItemOnCustomDate=false;
   currentPage=1;
   pendingItems!:LibraryItemsPage;
   isLoading=true;
+  issueItemData={
+    itemUniqueId: '',
+    quantity: 1,
+    expectedReturnDate: "",
+    issuerUniqueId: ''
+  }
   onInit(){
     // let id = this.activeRoute.snapshot.paramMap.get('id');
     let target=this.activeRoute.snapshot.url[0].path;
@@ -29,14 +38,17 @@ export class IssueAndReturnComponent {
       this.isReturnComponent=true;
     }else{
       this.titleService.setTitle('Issue Item');
+      const currentDate = new Date();
+      // Date after 15 day from today.
+      const futureDate = new Date();
+      futureDate.setDate(currentDate.getDate()+15);
+      let date = this.datePipe.transform(futureDate, 'yyyy-MM-dd');
+      if (date!==null){
+        this.issueItemData.expectedReturnDate =date;
+      }
     }
   }
-  issueItemData={
-    itemUniqueId: '',
-    quantity: 1,
-    expectedReturnDate: '',
-    issuerUniqueId: ''
-  }
+
   removeBorrowedItem(removedItem:Item):void{
     if (this.pendingItems.items === undefined ||this.pendingItems.total_records===undefined ||this.pendingItems.items.length <=0){
       return;
@@ -97,6 +109,9 @@ export class IssueAndReturnComponent {
     }else {
       this.handleDisplayToast('error',propertyName+ ' is not present !!');
     }
+  }
+  handleCheckBoxChange(){
+    this.returnItemOnCustomDate = !this.returnItemOnCustomDate;
   }
   handleDisplayToast(type:string,message:string){
     if(type==='success'){
