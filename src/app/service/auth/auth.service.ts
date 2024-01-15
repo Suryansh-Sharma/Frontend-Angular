@@ -24,6 +24,7 @@ export class AuthService {
       .subscribe({
         next:(res)=>{
           this.storeUserInfoInLocalStorage(res);
+          location.reload();
         },
         error:err => {
           console.log(err);
@@ -60,15 +61,31 @@ export class AuthService {
     if (!this.isLoggedIn())return;
     const helper = new JwtHelperService();
     if (helper.isTokenExpired(this.getJwtFromLocalStorage())){
-      SweatAl.fire('Error',"Sorry your session is expired please re login !!",'error').then(()=>{
-        this.logout();
-      });
+      // Try to get New Jwt From Refresh Token.
+      let token = localStorage.getItem('refreshToken');
+      if (token==null){
+        return;
+      }
+      this.authApi.getNewJwtFromRefreshToken(token)
+        .subscribe({
+          next:res=>{
+            this.storeUserInfoInLocalStorage(res);
+          },
+          error:err => {
+            console.log(err);
+            SweatAl.fire('Error',"Sorry your session is expired please re login !!",'error').then(()=>{
+              this.logout();
+            });
+          }
+        });
+
     }
   }
   logout(){
     localStorage.removeItem('isLogin');
     localStorage.removeItem('username');
     localStorage.removeItem('jwt');
+    localStorage.removeItem('refreshToken');
     this.isUserLogin=true;
     location.reload();
     return;
@@ -79,8 +96,8 @@ export class AuthService {
   storeUserInfoInLocalStorage(res:LoginResModel){
     localStorage.setItem('isLogin','true');
     localStorage.setItem('username',res.username);
-    localStorage.setItem('jwt',res.jwtResponse.token)
+    localStorage.setItem('jwt',res.jwtResponse.token);
+    localStorage.setItem('refreshToken',res.jwtResponse.refreshToken);
     this.isUserLogin=true;
-    location.reload();
   }
 }

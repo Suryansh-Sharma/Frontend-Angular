@@ -4,6 +4,7 @@ export interface LoginResModel{
   "isLogin": true,
   "jwtResponse": {
     "token": string,
-    "expireAfter": string
+    "expireAfter": string,
+    "refreshToken":string
   }
 }

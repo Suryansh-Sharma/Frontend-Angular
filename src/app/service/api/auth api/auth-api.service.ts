@@ -16,4 +16,7 @@ export class AuthApiService {
   loginAccount(model:LoginSignUpModel){
     return this.http.post<LoginResModel>(this.baseUrl+`login`,model)
   }
+  getNewJwtFromRefreshToken(token:string){
+    return this.http.get<LoginResModel>(this.baseUrl+`new-jwt-by-refresh-token?refresh_token=${token}`)
+  }
 }
