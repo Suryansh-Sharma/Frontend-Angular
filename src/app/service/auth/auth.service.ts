@@ -39,6 +39,7 @@ export class AuthService {
       .subscribe({
         next:(res)=>{
           this.storeUserInfoInLocalStorage(res);
+          location.reload();
         },
         error:err => {
           console.log(err);

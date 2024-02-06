@@ -1,10 +1,11 @@
 <div class="{{item.isReturnPeriodOver===true?'item-info-period-over':'item-info'}}">
-  <h5 class="Item-Name"><b>{{item.item_name}}..</b></h5>
+  <h5 class="Item-Name">{{item.item_name}}..</h5>
+  <span><b>Unique Id:- </b><a>{{item.item_unique_id}}</a></span>
   <span><b>Borrowed on:- </b> <a>{{item.borrowDate}}</a></span>
-  <span><b>Expected Returned on:- </b> <a>{{item.expectedReturnDate}}</a></span>
+  <span><b>Return Before:- </b> <a>{{item.expectedReturnDate}}</a></span>
   <span *ngIf="item.returnStatus"><b>Actual Returned on:- </b> <a>{{item.actualReturnDate}}</a></span>
   <span><b>Quantity:- </b> <a>{{item.quantity}}</a></span>
-  <span><a href="http://localhost:4200/item-full-detail/{{item.item_unique_id}}" >Show Item</a></span>
+  <span><a href="/item-full-detail/{{item.item_unique_id}}" target="_blank">Show Item</a></span>
 
   <div class="item-user-info">
 

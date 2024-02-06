@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Smythe&display=swap');
+
+b{
+  font-family: 'Space Mono', monospace;
+}
+a{
+  background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 .nav-bar{
   padding: 20px;
   background-color: #a6dbf9;

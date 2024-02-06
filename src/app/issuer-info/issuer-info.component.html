@@ -25,8 +25,8 @@
   <br>
   <hr>
   <br>
-  <h4>Issuer All Files</h4>
-  <div class="IssuerFinesSection">
+  <div class="IssuerFinesSection" *ngIf="this.IssuerData.allFine.length>0">
+    <h4 class="title">Issuer All Fines</h4>
     <div class="card-list">
       <div *ngFor="let fine of this.IssuerData.allFine" class="card">
         <p>{{ fine.payDateTime }}</p>
@@ -39,9 +39,9 @@
   </div>
   <br>
   <hr>
-  <h4>Issuer All Borrows</h4>
   <br>
   <div class="pending-items-section" *ngIf="!isLoading">
+    <h4 class="title">Issuer All Borrows</h4>
     <h5 class="home-page-top-op-title">{{borrowedItems.total_records}} Items</h5>
     <hr>
     <div class="items">

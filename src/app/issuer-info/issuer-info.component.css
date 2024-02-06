@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 .user-card {
+  font-family: 'Poppins', sans-serif;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px auto 0;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -46,6 +49,15 @@ h2 {
   grid-template-columns: repeat(3, 1fr);
   gap: 3px; /* Adjust spacing as needed */
   overflow: hidden;
+}
+.title{
+  text-align: center;
+  font-style: italic;
+  color: #1dcaff;
+  font-weight: bold;
+}
+.pending-items-section{
+  margin: 30px;
 }
 .pending-items-pagination{
   margin-top: 30px;

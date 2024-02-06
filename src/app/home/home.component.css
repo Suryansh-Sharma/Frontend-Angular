@@ -1,6 +1,15 @@
+/* Place in your CSS file at the top of the document */
+
+@import url('https://fonts.googleapis.com/css2?family=Smythe&display=swap');
 a {
-  color: black;
+  font-family: 'Smythe', cursive;
+  background: #121FCF;
+  background: linear-gradient(to right, #121FCF 0%, #CF3934 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
   text-decoration: none;
+  font-size: 25px;
 }
 .home-page{
   margin: 20px;

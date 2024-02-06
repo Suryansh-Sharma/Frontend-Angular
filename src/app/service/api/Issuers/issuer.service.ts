@@ -36,7 +36,7 @@ export class IssuerService {
   }
   returnFinedItem(issuer_unique_id:string,file:FormData){
     this.authService.validateJwt();
-    return this.http.post(this.baseUrl+`pay-fine-upload-pdf/${issuer_unique_id}`,file,{responseType:'text',headers:this.httpHeader()})
+    return this.http.post(this.baseUrl+`pay-fine-upload-pdf/${issuer_unique_id}`,file,{responseType:'text'})
   }
   getIssuerFullInfo(unique_id:string){
     return this.http.get<IssuerFullInfoModel>(this.baseUrl+`full-detail-by/unique-id/${unique_id}`)

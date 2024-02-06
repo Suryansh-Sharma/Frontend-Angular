@@ -75,7 +75,7 @@ export class AddUpdateItemComponent {
       this.itemData.stock= this.stock;
     } else if (propertyName in this.itemData) {
       // Use type assertion to tell TypeScript that the property exists
-      (this.itemData as any)[propertyName] = event.target.value.replaceAll(' ','');
+      (this.itemData as any)[propertyName] = event.target.value.replace(/(^\s+|\s+$)/g, '');
     } else {
       this.toastService.error("Property name is not present in form input " + propertyName);
     }
@@ -109,13 +109,13 @@ export class AddUpdateItemComponent {
   }
 
   handleBookForm(event:any){
-    (this.BookModelData as any)[event.target.name] = event.target.value.replaceAll(' ','');
+    (this.BookModelData as any)[event.target.name] = event.target.value.replace(/(^\s+|\s+$)/g, '');
     this.itemData.bookModel = this.BookModelData;
 
   }
 
   handleMagazineForm(event:any){
-    (this.MagazineModelData as any)[event.target.name] = event.target.value.replaceAll(' ','');
+    (this.MagazineModelData as any)[event.target.name] = event.target.value.replace(/(^\s+|\s+$)/g, '');
     this.itemData.magazineModel = this.MagazineModelData;
   }
 
@@ -257,7 +257,7 @@ export class AddUpdateItemComponent {
         next:()=>{
           SweatAl.fire('Success!', 'Item Updated successfully', 'success')
             .then(()=>{
-              this.router.navigate(['/']).then();
+              this.router.navigate(['/item-full-detail/'+this.uuid]).then();
             })
         },
         error:(err)=>{

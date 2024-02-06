@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <div class="pagination">
+        <div class="pagination" *ngIf="pendingItems.total_records!==undefined &&pendingItems.total_records > 0 ">
           <button class="pagination-btn" [disabled]="currentPage==1" (click)="previousPage()">Previous</button>
 
           <div class="pagination-pages">
